@@ -13,7 +13,6 @@ public class SelectionSort {
             list.set(idx, list.get(i));
             list.set(i, temp);
         }
-        System.out.println(list);
         return list;
     }
 }
