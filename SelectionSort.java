@@ -1,18 +1,15 @@
-import java.util.ArrayList;
-
 public class SelectionSort {
-    public ArrayList<Integer> selectionSort(ArrayList<Integer> list) {
-        for (int i = 0; i < list.size() - 1; i++) {
+    public void selectionSort(int[] list) {
+        for (int i = 0; i < list.length - 1; i++) {
             int idx = i;
-            for (int j = i ; j < list.size(); j++) {
-                if (list.get(j) < list.get(idx)) {
+            for (int j = i; j < list.length; j++) {
+                if (list[j] < list[idx]) {
                     idx = j;
                 }
             }
-            int temp = list.get(idx);
-            list.set(idx, list.get(i));
-            list.set(i, temp);
+            int temp = list[idx];
+            list[idx] = list[i];
+            list[i] = temp;
         }
-        return list;
     }
 }
