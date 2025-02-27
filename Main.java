@@ -1,32 +1,53 @@
-import java.util.ArrayList;
-import java.io.*;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        SelectionSort selectionSort = new SelectionSort();
-        BubbleSort bubbleSort = new BubbleSort();
-        InsertionSort insertionSort = new InsertionSort();
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.println("Enter size of the array <0 to exit>:");
+            int size = scan.nextInt();
+            if (size > 0) {
+                Sort_displayTime(getRandomArray(size));
+            } else {
+                break;
+            }
+        }
+    }
 
+    public static void Sort_displayTime(int[] arr) {
+        int[] bubbleCopy, insertionCopy, selectionCopy;
+        long startTime, endTime, actualTime;
 
-        ArrayList<Integer> list = getRandomIntegerArrayList(100000);
-        ArrayList<Integer> temp = (ArrayList<Integer>) list.clone();
-        ArrayList<Integer> temp2 = (ArrayList<Integer>) list.clone();
+        bubbleCopy = arr.clone();
+        insertionCopy = arr.clone();
+        selectionCopy = arr.clone();
 
-        long startTime = System.currentTimeMillis();
-        selectionSort.selectionSort(temp);
-        long endTime = System.currentTimeMillis();
-        long actualTime = endTime - startTime;
-        System.out.println("Running time for Slection Sort  is "+actualTime+" ms");
+        startTime = System.nanoTime();
+        Sort.BubbleSort(bubbleCopy);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime)/1000;
+        System.out.println("Running time for " + arr.length + " elements Bubble Sort  is: " + actualTime + " Ms");
 
+        startTime = System.nanoTime();
+        Sort.insertionSort(insertionCopy);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime)/1000;
+        System.out.println("Running time for " + arr.length + " elements Insertion Sort  is: " + actualTime + " Ms");
 
+        startTime = System.nanoTime();
+        Sort.selectionSort(selectionCopy);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime)/1000;
+        System.out.println("Running time for " + arr.length + " Selection Sort  is: " + actualTime + " Ms");
 
     }
-    public static ArrayList<Integer> getRandomIntegerArrayList(int size) {
-        ArrayList<Integer> Array = new ArrayList<>();
+
+    public static int[] getRandomArray(int size) {
+        int[] Array = new int[size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            Array.add(random.nextInt(100));
+            Array[i] = random.nextInt(1000);
         }
         return Array;
     }
