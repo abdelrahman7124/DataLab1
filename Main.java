@@ -17,7 +17,7 @@ public class Main {
     }
 
     public static void Sort_displayTime(int[] arr) {
-        int[] bubbleCopy, insertionCopy, selectionCopy,heapCopy,mergeCopy,quickCopy;
+        int[] bubbleCopy, insertionCopy, selectionCopy,heapCopy,mergeCopy,quickCopy,hybridCopy;
         long startTime, endTime, actualTime;
         Sort bubbleSort = new BubbleSort();
         Sort insertionSort = new InsertionSort();
@@ -32,45 +32,51 @@ public class Main {
         heapCopy = arr.clone();
         mergeCopy = arr.clone();
         quickCopy = arr.clone();
+        hybridCopy = arr.clone();
 
         startTime = System.nanoTime();
         bubbleSort.sort(bubbleCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " elements Bubble Sort  is: " + actualTime + " Ms");
+        System.out.println("Running time for " + arr.length + " elements using Bubble Sort  is: " + actualTime + " Ms");
 
         startTime = System.nanoTime();
         insertionSort.sort(insertionCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " elements Insertion Sort  is: " + actualTime + " Ms");
+        System.out.println("Running time for " + arr.length + " elements using Insertion Sort  is: " + actualTime + " Ms");
 
         startTime = System.nanoTime();
         selectionSort.sort(selectionCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " Selection Sort  is: " + actualTime + " Ms");
+        System.out.println("Running time for " + arr.length + " elements using Selection Sort  is: " + actualTime + " Ms");
 
         startTime = System.nanoTime();
         heapSort.sort(heapCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " Heap Sort  is: " + actualTime + " Ms");
+        System.out.println("Running time for " + arr.length + " elements using Heap Sort  is: " + actualTime + " Ms");
 
         startTime = System.nanoTime();
         mergeSort.sort(mergeCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " Merge Sort  is: " + actualTime + " Ms");
-
+        System.out.println("Running time for " + arr.length + " elements using Merge Sort  is: " + actualTime + " Ms");
 
 
         startTime = System.nanoTime();
         quickSort.sort(quickCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " Quick Sort  is: " + actualTime + " Ms");
+        System.out.println("Running time for " + arr.length + " elements using Quick Sort  is: " + actualTime + " Ms");
 
+        HybridSort hybridSort = new HybridSort();
+        startTime = System.nanoTime();
+        hybridSort.sort(hybridCopy,6);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime)/1000;
+        System.out.println("Running time for " + arr.length + " elements using Hybrid Sort  is: " + actualTime + " Ms");
     }
 
     public static int[] getRandomArray(int size) {
