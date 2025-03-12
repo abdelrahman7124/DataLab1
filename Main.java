@@ -17,17 +17,21 @@ public class Main {
     }
 
     public static void Sort_displayTime(int[] arr) {
-        int[] bubbleCopy, insertionCopy, selectionCopy,heapCopy;
+        int[] bubbleCopy, insertionCopy, selectionCopy,heapCopy,mergeCopy,quickCopy;
         long startTime, endTime, actualTime;
         Sort bubbleSort = new BubbleSort();
         Sort insertionSort = new InsertionSort();
         Sort selectionSort = new SelectionSort();
         Sort heapSort = new HeapSort();
+        Sort mergeSort = new MergeSort();
+        Sort quickSort = new QuickSort();
 
         bubbleCopy = arr.clone();
         insertionCopy = arr.clone();
         selectionCopy = arr.clone();
         heapCopy = arr.clone();
+        mergeCopy = arr.clone();
+        quickCopy = arr.clone();
 
         startTime = System.nanoTime();
         bubbleSort.sort(bubbleCopy);
@@ -52,6 +56,20 @@ public class Main {
         endTime = System.nanoTime();
         actualTime = (endTime - startTime)/1000;
         System.out.println("Running time for " + arr.length + " Heap Sort  is: " + actualTime + " Ms");
+
+        startTime = System.nanoTime();
+        mergeSort.sort(mergeCopy);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime)/1000;
+        System.out.println("Running time for " + arr.length + " Merge Sort  is: " + actualTime + " Ms");
+
+
+
+        startTime = System.nanoTime();
+        quickSort.sort(quickCopy);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime)/1000;
+        System.out.println("Running time for " + arr.length + " Quick Sort  is: " + actualTime + " Ms");
 
     }
 
