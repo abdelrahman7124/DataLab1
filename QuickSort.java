@@ -18,6 +18,9 @@ public class QuickSort extends Sort {
     }
 
     public int getKthSmallest(int[] arr, int start, int end, int k){
+         if (end <= start)
+            return -1;
+        
         int pivot = partition(arr, start, end);
 
         if(k-1 < pivot)
