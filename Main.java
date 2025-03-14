@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         int selection = 0;
         do {
-            System.out.println("Choose an Option: \n1- Generate and Sort an Array\n2- Find Kth smallest in an Array");
+            System.out.println("Choose an Option: \n1- Generate and Sort an Array\n2- Find Kth smallest in an Array\n3-To exit");
             selection = scan.nextInt();
 
             if (selection == 1)
@@ -22,9 +23,14 @@ public class Main {
                     }
                 }
             else if (selection == 2) {
-                getKthSmallest();
+                System.out.print("Enter size of the array: ");
+                int size = scan.nextInt();
+                getKthSmallest(getRandomArray(size));
             }
-        } while (selection < 1 || selection > 2);
+            else if (selection == 3) {
+                break;
+            }
+        } while (selection < 1 || selection > 3);
     }
 
     public static void Sort_displayTime(int[] arr) {
@@ -37,6 +43,7 @@ public class Main {
         Sort heapSort = new HeapSort();
         Sort mergeSort = new MergeSort();
         Sort quickSort = new QuickSort();
+        HybridSort hybridSort = new HybridSort();
 
         bubbleCopy = arr.clone();
         insertionCopy = arr.clone();
@@ -74,41 +81,41 @@ public class Main {
         endTime = System.nanoTime();
 
         actualTime = (endTime - startTime) / 1000;
-        System.out.println("Running time for " + arr.length + " Heap Sort  is: " + actualTime + " Ms");
+        System.out.println("Running time for " + arr.length + " elements using Heap Sort  is: " + actualTime + " Ms");
 
         startTime = System.nanoTime();
         quickSort.sort(quickCopy);
         endTime = System.nanoTime();
         actualTime = (endTime - startTime) / 1000;
-        System.out.println("Running Time for " + arr.length + " Quick Sort is " + actualTime + " Ms");
+        System.out.println("Running Time for " + arr.length + " elements using Quick Sort is " + actualTime + " Ms");
+
+        startTime = System.nanoTime();
+        mergeSort.sort(mergeCopy);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime) / 1000;
+        System.out.println("Running Time for " + arr.length + " elements using Merge Sort is " + actualTime + " Ms");
+
+        startTime = System.nanoTime();
+        hybridSort.sort(hybridCopy,6);
+        endTime = System.nanoTime();
+        actualTime = (endTime - startTime) / 1000;
+        System.out.println("Running Time for " + arr.length + " elements using Hybrid Sort is " + actualTime + " Ms");
+
     }
 
-    public static void getKthSmallest() {
-
+    public static void getKthSmallest(int[] arr) {
         QuickSort quickSort = new QuickSort();
+        int k;
 
-        int k, size = 0;
+        System.out.print("Enter K:");
+        k = scan.nextInt();
 
-        while (true) {
-            System.out.print("Enter size of the array <0 to exit>: ");
-            size = scan.nextInt();
+        System.out.println("Elements of the array are: "+ Arrays.toString(arr));
 
-            System.out.print("Enter K:");
-            k = scan.nextInt();
-
-            if (size >= 0 && k>0 && k<= size)
-                break;
-        }
-
-        int[] arr = new int[size];
-
-        System.out.print("Enter elements of the array:");
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = scan.nextInt();
-        }
 
         int smallest = quickSort.getKthSmallest(arr, 0, arr.length - 1, k);
-
+        quickSort.sort(arr);
+        System.out.println("Sorted array just to check : "+ Arrays.toString(arr));
         switch (k){
             case 1: System.out.println("1st Smallest element is " + smallest);
                 break;
@@ -118,30 +125,6 @@ public class Main {
                 break;
             default:System.out.println(k + "th Smallest element is " + smallest);
         }
-
-        actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " elements using Heap Sort  is: " + actualTime + " Ms");
-
-        startTime = System.nanoTime();
-        mergeSort.sort(mergeCopy);
-        endTime = System.nanoTime();
-        actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " elements using Merge Sort  is: " + actualTime + " Ms");
-
-
-        startTime = System.nanoTime();
-        quickSort.sort(quickCopy);
-        endTime = System.nanoTime();
-        actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " elements using Quick Sort  is: " + actualTime + " Ms");
-
-        HybridSort hybridSort = new HybridSort();
-        startTime = System.nanoTime();
-        hybridSort.sort(hybridCopy,6);
-        endTime = System.nanoTime();
-        actualTime = (endTime - startTime)/1000;
-        System.out.println("Running time for " + arr.length + " elements using Hybrid Sort  is: " + actualTime + " Ms");
-
     }
 
     public static int[] getRandomArray(int size) {
